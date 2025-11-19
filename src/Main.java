@@ -17,7 +17,7 @@ public class Main
         game.recordPlay(0);
         game.recordPlay(4);
         game.recordPlay(0);
-        System.out.println(game.getScore());;
+        System.out.println(game.getScore());
         Scoreboard match = new Scoreboard("Lions", "Tigers");
         System.out.println(match.getScore());
         System.out.println(game.getScore());
