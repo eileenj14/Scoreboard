@@ -1,28 +1,28 @@
 public class Scoreboard
 {
-    private String nameOfTeamOne;
-    private String nameofTeamTwo;
+    private String teamOne;
+    private String teamTwo;
     private int scoreOfTeamOne;
     private int scoreOfTeamTwo;
     private String activeTeam;
 
     public Scoreboard(String name1, String name2)
     {
-        nameOfTeamOne = name1;
-        nameofTeamTwo = name2;
-        activeTeam = nameOfTeamOne;
+        teamOne = name1;
+        teamTwo = name2;
+        activeTeam = teamOne;
     }
 
     public void recordPlay(int pointsScored)
     {
         if(pointsScored == 0)
         {
-            if(activeTeam.equals(nameOfTeamOne)) activeTeam = nameofTeamTwo;
-            else activeTeam = nameOfTeamOne;
+            if(activeTeam.equals(teamOne)) activeTeam = teamTwo;
+            else activeTeam = teamOne;
         }
         else
         {
-            if(activeTeam.equals(nameOfTeamOne)) scoreOfTeamOne += pointsScored;
+            if(activeTeam.equals(teamOne)) scoreOfTeamOne += pointsScored;
             else scoreOfTeamTwo += pointsScored;
         }
     }
