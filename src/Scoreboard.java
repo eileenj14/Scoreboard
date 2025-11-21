@@ -31,4 +31,16 @@ public class Scoreboard
     {
         return scoreOfTeamOne + "-" + scoreOfTeamTwo + "-" + activeTeam;
     }
+
+    public String getTeamName(int teamNum)
+    {
+        if(teamNum == 1) return teamOne;
+        return teamTwo;
+    }
+
+    public int getIndividualScore(int teamNum)
+    {
+        if(teamNum == 1) return scoreOfTeamOne;
+        return scoreOfTeamTwo;
+    }
 }

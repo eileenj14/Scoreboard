@@ -1,5 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main
@@ -26,24 +28,61 @@ public class Main
         System.out.println(match.getScore());
         System.out.println(game.getScore());
         System.out.println();
-        System.out.println(read());
+        read();
     }
 
-    public static String read() throws FileNotFoundException
+    public static void read() throws FileNotFoundException
     {
         File f = new File("Scoreboard.txt");
         Scanner s = new Scanner(f);
-        String[] teams = new String[numOfTeams()];
+        String[] tempTeamsArray = teams();
+        List<String> teams = Arrays.asList(tempTeamsArray);
         int[] teamWins = new int[numOfTeams()];
         while(s.hasNextLine())
         {
             Scanner ss = new Scanner(s.nextLine());
+            Scoreboard game = new Scoreboard(ss.next(), ss.next());
+            while(ss.hasNextInt())
+            {
+                game.recordPlay(ss.nextInt());
+            }
+            if(game.getIndividualScore(1) != game.getIndividualScore(2)) {
+                if (game.getIndividualScore(1) > game.getIndividualScore(2)) {
+                    int index = teams.indexOf(game.getTeamName(1));
+                    teamWins[index] = game.getIndividualScore(1);
+                } else {
+                    int index = teams.indexOf(game.getTeamName(2));
+                    teamWins[index] = game.getIndividualScore(2);
+                }
+            }
         }
         for(int i = 0; i < numOfTeams(); i++)
         {
-            System.out.println(teams[i] + " " + teamWins[i]);
+            System.out.println(teams.get(i) + " " + teamWins[i]);
         }
-        return null;
+    }
+
+    public static String[] teams() throws FileNotFoundException
+    {
+        File f = new File("Scoreboard.txt");
+        Scanner s = new Scanner(f);
+        String[] teams = new String[numOfTeams()];
+        teams[0] = s.next();
+        int numOfTeams = 1;
+        while(s.hasNext())
+        {
+            String team = s.next();
+            for(int i = 0; i < numOfTeams; i++)
+            {
+                if(team.equals(teams[i])) break;
+                if(i + 1 == numOfTeams)
+                {
+                    teams[numOfTeams] = team;
+                    numOfTeams++;
+                }
+            }
+        }
+        return teams;
     }
 
     public static int numOfTeams() throws FileNotFoundException
