@@ -32,15 +32,13 @@ public class Scoreboard
         return scoreOfTeamOne + "-" + scoreOfTeamTwo + "-" + activeTeam;
     }
 
-    public String getTeamName(int teamNum)
+    public String getNameOfWinningTeam()
     {
-        if(teamNum == 1) return teamOne;
-        return teamTwo;
-    }
-
-    public int getIndividualScore(int teamNum)
-    {
-        if(teamNum == 1) return scoreOfTeamOne;
-        return scoreOfTeamTwo;
+        if(scoreOfTeamOne != scoreOfTeamTwo)
+        {
+            if(scoreOfTeamOne > scoreOfTeamTwo) return teamOne;
+            else return teamTwo;
+        }
+        return null;
     }
 }
