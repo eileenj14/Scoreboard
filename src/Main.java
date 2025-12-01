@@ -52,10 +52,28 @@ public class Main
                 teamWins[index] = teamWins[index] + 1;
             }
         }
-        for(int i = 0; i < getNumOfTeams(); i++)
+        String teamWithMostWins = teams.getFirst();
+        int mostWins = teamWins[0];
+        for(int i = 1; i < getNumOfTeams(); i++)
         {
-            System.out.println(teams.get(i) + " " + teamWins[i]);
+            if(teamWins[i] > mostWins)
+            {
+                teamWithMostWins = teams.get(i);
+                mostWins = teamWins[i];
+            }
         }
+        String teamWithLeastWins = teams.getFirst();
+        int leastWins = teamWins[0];
+        for(int i = 1; i < getNumOfTeams(); i++)
+        {
+            if(teamWins[i] < leastWins)
+            {
+                teamWithLeastWins = teams.get(i);
+                leastWins = teamWins[i];
+            }
+        }
+        System.out.println(teamWithMostWins + " won the most games at " + mostWins + " wins.");
+        System.out.println(teamWithLeastWins + " won the least games at " + leastWins + " wins.");
     }
 
     public static String[] getListOfTeams() throws FileNotFoundException
