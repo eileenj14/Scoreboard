@@ -1,8 +1,9 @@
 import java.io.FileNotFoundException;
 import java.io.File;
+import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 public class Main
 {
@@ -35,9 +36,8 @@ public class Main
     {
         File f = new File("Scoreboard.txt");
         Scanner s = new Scanner(f);
-        String[] tempTeamsArray = getListOfTeams();
-        List<String> teams = Arrays.asList(tempTeamsArray);
-        int[] teamWins = new int[getNumOfTeams()];
+        List<String> teams = new ArrayList<>(Arrays.asList("Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet"));
+        int[] teamWins = new int[7];
         while(s.hasNextLine())
         {
             Scanner ss = new Scanner(s.nextLine());
@@ -53,19 +53,16 @@ public class Main
             }
         }
         String teamWithMostWins = teams.getFirst();
+        String teamWithLeastWins = teams.getFirst();
         int mostWins = teamWins[0];
-        for(int i = 1; i < getNumOfTeams(); i++)
+        int leastWins = teamWins[0];
+        for(int i = 1; i < 7; i++)
         {
             if(teamWins[i] > mostWins)
             {
                 teamWithMostWins = teams.get(i);
                 mostWins = teamWins[i];
             }
-        }
-        String teamWithLeastWins = teams.getFirst();
-        int leastWins = teamWins[0];
-        for(int i = 1; i < getNumOfTeams(); i++)
-        {
             if(teamWins[i] < leastWins)
             {
                 teamWithLeastWins = teams.get(i);
@@ -74,57 +71,5 @@ public class Main
         }
         System.out.println(teamWithMostWins + " won the most games at " + mostWins + " wins.");
         System.out.println(teamWithLeastWins + " won the least games at " + leastWins + " wins.");
-    }
-
-    public static String[] getListOfTeams() throws FileNotFoundException
-    {
-        File f = new File("Scoreboard.txt");
-        Scanner s = new Scanner(f);
-        String[] teams = new String[getNumOfTeams()];
-        teams[0] = s.next();
-        int numOfTeams = 1;
-        while(s.hasNext())
-        {
-            String team = s.next();
-            if(team.length() > 1)
-            {
-                for(int i = 0; i < numOfTeams; i++)
-                {
-                    if(team.equals(teams[i])) break;
-                    if(i + 1 == numOfTeams)
-                    {
-                        teams[numOfTeams] = team;
-                        numOfTeams++;
-                    }
-                }
-            }
-        }
-        return teams;
-    }
-
-    public static int getNumOfTeams() throws FileNotFoundException
-    {
-        File f = new File("Scoreboard.txt");
-        Scanner s = new Scanner(f);
-        String[] teams = new String[10];
-        teams[0] = s.next();
-        int numOfTeams = 1;
-        while(s.hasNext())
-        {
-            String team = s.next();
-            if(team.length() > 1)
-            {
-                for(int i = 0; i < numOfTeams; i++)
-                {
-                    if(team.equals(teams[i])) break;
-                    if(i + 1 == numOfTeams)
-                    {
-                        teams[numOfTeams] = team;
-                        numOfTeams++;
-                    }
-                }
-            }
-        }
-        return numOfTeams;
     }
 }
