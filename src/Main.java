@@ -37,7 +37,7 @@ public class Main
         File f = new File("Scoreboard.txt");
         Scanner s = new Scanner(f);
         List<String> teams = new ArrayList<>(Arrays.asList("Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet"));
-        int[] teamWins = new int[7];
+        List<Integer> teamWins = new ArrayList<>(Arrays.asList(0, 0, 0, 0, 0, 0, 0));
         while(s.hasNextLine())
         {
             Scanner ss = new Scanner(s.nextLine());
@@ -49,24 +49,24 @@ public class Main
             if(game.getNameOfWinningTeam() != null)
             {
                 int index = teams.indexOf(game.getNameOfWinningTeam());
-                teamWins[index] = teamWins[index] + 1;
+                teamWins.set(index, teamWins.get(index) + 1);
             }
         }
         String teamWithMostWins = teams.getFirst();
         String teamWithLeastWins = teams.getFirst();
-        int mostWins = teamWins[0];
-        int leastWins = teamWins[0];
+        int mostWins = teamWins.getFirst();
+        int leastWins = teamWins.getFirst();
         for(int i = 1; i < 7; i++)
         {
-            if(teamWins[i] > mostWins)
+            if(teamWins.get(i) > mostWins)
             {
                 teamWithMostWins = teams.get(i);
-                mostWins = teamWins[i];
+                mostWins = teamWins.get(i);
             }
-            if(teamWins[i] < leastWins)
+            if(teamWins.get(i) < leastWins)
             {
                 teamWithLeastWins = teams.get(i);
-                leastWins = teamWins[i];
+                leastWins = teamWins.get(i);
             }
         }
         System.out.println(teamWithMostWins + " won the most games at " + mostWins + " wins.");
